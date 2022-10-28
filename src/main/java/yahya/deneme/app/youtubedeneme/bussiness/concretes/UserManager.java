@@ -7,6 +7,7 @@ import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.UserRepository;
 import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserManager implements UserService {
@@ -25,5 +26,15 @@ public class UserManager implements UserService {
     @Override
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getOneUser(int userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    public void deleteOneUser(int userId) {
+        userRepository.deleteById(userId);
     }
 }
