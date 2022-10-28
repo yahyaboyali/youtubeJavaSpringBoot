@@ -8,26 +8,28 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name="post")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Post {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY) // STRATEJİ NASIL ARTACAK BU BELİRTİYORUZ
-    @Column(name = "user_id")
+    @Column(name = "pos_id")
     private int id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "password")
-    private String password;
+    @Lob
+    @Column(name = "text",columnDefinition = "text")
+    private String text;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
+    @ManyToOne
+    @JoinColumn(name = "user_user_id")
+    private User user;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
 }
