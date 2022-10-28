@@ -14,11 +14,11 @@ public class Comment {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_pos_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @Lob
