@@ -1,16 +1,18 @@
 package yahya.deneme.app.youtubedeneme.bussiness.abstracts;
 
+import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> getAll();
+    DataResult<List<User>> getAll();
 
-    void save(User user);
+    Result save(User user);
 
-    Optional<User> getOneUser(int userId);
+    DataResult<Optional<User>> getOneUser(int userId);
 
-    void deleteOneUser(int userId);
+    Result deleteOneUser(int userId);
 }

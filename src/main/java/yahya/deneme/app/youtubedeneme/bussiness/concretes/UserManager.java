@@ -1,8 +1,12 @@
 package yahya.deneme.app.youtubedeneme.bussiness.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.UserService;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.SuccessDataResult;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.UserRepository;
 import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
@@ -19,22 +23,22 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public DataResult<List<User>> getAll() {
+        return new SuccessDataResult<List<User>>(this.userRepository.findAll());
     }
 
     @Override
-    public void save(User user) {
+    public Result save(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public Optional<User> getOneUser(int userId) {
+    public DataResult<Optional<User>> getOneUser(int userId) {
         return userRepository.findById(userId);
     }
 
     @Override
-    public void deleteOneUser(int userId) {
+    public Result deleteOneUser(int userId) {
         userRepository.deleteById(userId);
     }
 }
