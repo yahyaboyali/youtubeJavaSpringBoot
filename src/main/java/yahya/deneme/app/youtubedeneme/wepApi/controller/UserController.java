@@ -3,6 +3,8 @@ package yahya.deneme.app.youtubedeneme.wepApi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.UserService;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public List<User> getAll(){
+    public DataResult<List<User>> getAll(){
         return userService.getAll();
     }
     @PostMapping("/addUser")
@@ -29,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping("getOneUser/{userId}")
-    public Optional<User> getOneUser(@PathVariable("userId") int userId) {
+    public DataResult<Optional<User>> getOneUser(@PathVariable("userId") int userId) {
         return userService.getOneUser(userId);
     }
     @PutMapping("updateuser/{userId}")
     public  User updateOneUser(@PathVariable int userId, @RequestBody User newUser) {
-        Optional<User> user = userService.getOneUser(userId);
+        Optional<User> user = userService.getOneUser(userId).getData();
         if(user.isPresent()) {
             User foundUser = user.get();
             foundUser.setUserName(newUser.getUserName());
@@ -46,7 +48,7 @@ public class UserController {
         }
     }
     @DeleteMapping("deleteUser/{userId}")
-    public void deleteOneUser(@PathVariable int userId) {
-        userService.deleteOneUser(userId);
+    public Result deleteOneUser(@PathVariable int userId) {
+        return userService.deleteOneUser(userId);
     }
 }
