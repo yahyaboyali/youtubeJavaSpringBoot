@@ -15,7 +15,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY) // STRATEJİ NASIL ARTACAK BU BELİRTİYORUZ
-    @Column(name = "user_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "user_name")
@@ -29,5 +29,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
 
 }

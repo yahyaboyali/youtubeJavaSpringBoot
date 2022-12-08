@@ -18,14 +18,15 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY) // STRATEJİ NASIL ARTACAK BU BELİRTİYORUZ
-    @Column(name = "post_id")
+    @Column(name = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)//bir user silinirse postlarını sil
+    @JsonIgnore//SERilazitionda sorun çıkarmasın diye
     private int id;
 
     @Column(name = "title")
     private String title;
 
-    @Lob
-    @Column(name = "text",columnDefinition = "text")
+    @Column(name = "text")
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,5 +37,8 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "post")
+    private List<Like> likes;
 
 }
