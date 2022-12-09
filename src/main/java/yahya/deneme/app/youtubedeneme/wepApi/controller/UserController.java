@@ -36,16 +36,7 @@ public class UserController {
     }
     @PutMapping("updateuser/{userId}")
     public  DataResult<Optional<User>> updateOneUser(@PathVariable int userId, @RequestBody User newUser) {
-        Optional<User> user = userService.getOneUser(userId).getData();
-        if(user.isPresent()) {
-            User foundUser = user.get();
-            foundUser.setUserName(newUser.getUserName());
-            foundUser.setPassword(newUser.getPassword());
-            userService.save(foundUser);
-            return userService.getOneUser(userId);
-        }else {
-            return null;
-        }
+        return userService.updateUser(userId,newUser);
     }
     @DeleteMapping("deleteUser/{userId}")
     public Result deleteOneUser(@PathVariable int userId) {

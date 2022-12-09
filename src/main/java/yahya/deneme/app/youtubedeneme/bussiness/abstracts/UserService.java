@@ -15,4 +15,6 @@ public interface UserService {
     DataResult<Optional<User>> getOneUser(int userId);
 
     Result deleteOneUser(int userId);
+
+    DataResult<Optional<User>>  updateUser(int userId, User newUser);
 }
