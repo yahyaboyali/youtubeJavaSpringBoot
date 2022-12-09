@@ -41,4 +41,10 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
 
+    public Post(int id, String title, String text, User user) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.user = user;
+    }
 }

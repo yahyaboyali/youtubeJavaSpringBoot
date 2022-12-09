@@ -2,11 +2,11 @@ package yahya.deneme.app.youtubedeneme.bussiness.concretes;
 
 import org.springframework.stereotype.Service;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.PostService;
-import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
-import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
-import yahya.deneme.app.youtubedeneme.core.utilities.results.SuccessDataResult;
-import yahya.deneme.app.youtubedeneme.core.utilities.results.SuccessResult;
+import yahya.deneme.app.youtubedeneme.bussiness.abstracts.UserService;
+import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
+import yahya.deneme.app.youtubedeneme.core.utilities.results.*;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.PostRepo;
+import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.UserRepository;
 import yahya.deneme.app.youtubedeneme.entities.concretes.Post;
 import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
@@ -17,9 +17,14 @@ import java.util.Optional;
 public class PostManager implements PostService {
 
     private PostRepo postRepo;
+    private UserService userService;
+    private final UserRepository userRepository;
 
-    public PostManager(PostRepo postRepo) {
+    public PostManager(PostRepo postRepo, UserService userService,
+                       UserRepository userRepository) {
         this.postRepo = postRepo;
+        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -31,13 +36,33 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public Result save(Post post) {
-        postRepo.save(post);
-        return new SuccessResult("başarılı");
+    public Result save(PostRequest postRequest) {
+        DataResult<Optional<User>> dataResult = userService.getOneUser(postRequest.getUserId());
+        if(!dataResult.getData().isPresent()) {
+            return new ErrorResult("böyle bir kullanıcı yok");
+        } else {
+            Post post = new Post(postRequest.getId(),postRequest.getTitle(),postRequest.getText(),dataResult.getData().get());
+            postRepo.save(post);
+            return new SuccessResult("başarılı");
+        }
     }
 
     @Override
     public DataResult<Post> getOnePost(int postId) {
         return new SuccessDataResult<>(postRepo.findById(postId).orElse(null),"tek post geldi");
+    }
+
+    @Override
+    public Result updatePost(int postId) {
+        if(postRepo.findById(postId).isPresent()) {
+            return new SuccessResult("başarılı");
+        }else {
+            return new ErrorResult("böyle bir post yok");
+        }
+    }
+    @Override
+    public Result deletePost(int postId) {
+            postRepo.deleteById(postId);
+            return new SuccessResult("başarılı silindi");
     }
 }
