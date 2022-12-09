@@ -22,18 +22,22 @@ public class PostManager implements PostService {
         this.postRepo = postRepo;
     }
 
-
     @Override
     public DataResult<List<Post>> getAllPost(Optional<Integer> userId) {
         if( userId.isPresent()) {
-            return new SuccessDataResult<List<Post>>(postRepo.findByUserId(userId.get()),"post geldi hanım");
+            return new SuccessDataResult<>(postRepo.findByUserId(userId.get()),"post geldi hanım");
         }
-        return new SuccessDataResult<List<Post>>(postRepo.findAll(),"tüm postlar geldi hanım");
+        return new SuccessDataResult<>(postRepo.findAll(),"tüm postlar geldi hanım");
     }
 
     @Override
     public Result save(Post post) {
         postRepo.save(post);
         return new SuccessResult("başarılı");
+    }
+
+    @Override
+    public DataResult<Post> getOnePost(int postId) {
+        return new SuccessDataResult<>(postRepo.findById(postId).orElse(null),"tek post geldi");
     }
 }

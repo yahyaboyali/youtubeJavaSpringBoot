@@ -26,6 +26,10 @@ public class PostController {
     public DataResult<List<Post>> getAllPost(@RequestParam Optional<Integer> userId) {
         return postService.getAllPost(userId);
     }
+    @GetMapping("/{postId}")
+    public DataResult<Post> getOnePost(@PathVariable int postId) {
+        return postService.getOnePost(postId);
+    }
 
     @PostMapping("/addPost")
     public Result addPost(@RequestBody Post post) {

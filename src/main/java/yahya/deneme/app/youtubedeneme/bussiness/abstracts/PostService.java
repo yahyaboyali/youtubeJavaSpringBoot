@@ -12,4 +12,6 @@ public interface PostService {
     DataResult<List<Post>> getAllPost(Optional<Integer> userId);
 
     Result save(Post post);
+
+    DataResult<Post> getOnePost(int postId);
 }
