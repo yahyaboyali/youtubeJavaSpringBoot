@@ -29,7 +29,7 @@ public class PostController {
         return postService.getAllPost(userId);
     }
     @GetMapping("/{postId}")
-    public DataResult<Post> getOnePost(@PathVariable int postId) {
+    public DataResult<Optional<Post>> getOnePost(@PathVariable int postId) {
         return postService.getOnePost(postId);
     }
 

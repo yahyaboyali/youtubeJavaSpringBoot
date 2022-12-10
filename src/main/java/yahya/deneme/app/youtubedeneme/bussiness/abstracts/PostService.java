@@ -15,7 +15,7 @@ public interface PostService {
 
     Result save(PostRequest postRequest);
 
-    DataResult<Post> getOnePost(int postId);
+    DataResult<Optional<Post>> getOnePost(int postId);
     Result updatePost(int postId, PostUpdate postUpdate);
 
     Result deletePost(int postId);

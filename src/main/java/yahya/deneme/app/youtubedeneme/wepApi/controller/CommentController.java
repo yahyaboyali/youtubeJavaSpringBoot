@@ -3,6 +3,8 @@ package yahya.deneme.app.youtubedeneme.wepApi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.CommentService;
+import yahya.deneme.app.youtubedeneme.bussiness.requests.CommentRequest;
+import yahya.deneme.app.youtubedeneme.bussiness.requests.CommentUpdateResponse;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.Comment;
@@ -32,7 +34,11 @@ public class CommentController {
         return commentService.findById(commentId);
     }
     @PostMapping("/save")
-    public Result save(@RequestBody Comment comment) {
-       return commentService.save(comment);
+    public Result createComment(@RequestBody CommentRequest commentRequest) {
+       return commentService.createComment(commentRequest);
+    }
+    @PutMapping("/updateComment/{commentId}")
+    public Result updateComment(@PathVariable int commentId, @RequestBody CommentUpdateResponse commentUpdateResponse) {
+        return commentService.updateComment(commentId, commentUpdateResponse);
     }
 }

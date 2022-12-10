@@ -49,8 +49,12 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public DataResult<Post> getOnePost(int postId) {
-        return new SuccessDataResult<>(postRepo.findById(postId).orElse(null),"tek post geldi");
+    public DataResult<Optional<Post>> getOnePost(int postId) {
+        if(postRepo.findById((postId)).isPresent()){
+            return new SuccessDataResult<>(postRepo.findById(postId),"tek post geldi");
+        } else{
+            return new ErrorDataResult<>("böyle bir post yok");
+        }
     }
 
     @Override
