@@ -78,4 +78,15 @@ public class CommentManager implements CommentService {
             return new ErrorResult("böyle bir commit yok aga");
         }
     }
+
+    @Override
+    public Result deleteComment(int commentId) {
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        if(comment.isPresent()) {
+            commentRepository.deleteById(commentId);
+            return new SuccessResult("başarılı bir şekilde silindi");
+        } else {
+            return new ErrorResult("böyle bir comment yok olmayanı silemezsin");
+        }
+    }
 }

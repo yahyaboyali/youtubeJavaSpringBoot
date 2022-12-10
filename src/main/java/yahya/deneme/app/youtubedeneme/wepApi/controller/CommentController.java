@@ -41,4 +41,8 @@ public class CommentController {
     public Result updateComment(@PathVariable int commentId, @RequestBody CommentUpdateResponse commentUpdateResponse) {
         return commentService.updateComment(commentId, commentUpdateResponse);
     }
+    @DeleteMapping("/deleteComment/{commentId}")
+    public Result deleteCommit(@PathVariable int commentId) {
+        return commentService.deleteComment(commentId);
+    }
 }

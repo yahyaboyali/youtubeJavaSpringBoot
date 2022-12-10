@@ -18,4 +18,6 @@ public interface CommentService {
     DataResult<Optional<Comment>> findById(int commentId);
 
     Result updateComment(int commentId, CommentUpdateResponse commentUpdateResponse);
+
+    Result deleteComment(int commentId);
 }
