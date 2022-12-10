@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.PostService;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.UserService;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
+import yahya.deneme.app.youtubedeneme.bussiness.requests.PostUpdate;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.*;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.PostRepo;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.UserRepository;
@@ -53,8 +54,13 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public Result updatePost(int postId) {
-        if(postRepo.findById(postId).isPresent()) {
+    public Result updatePost(int postId , PostUpdate postUpdate) {
+        Optional<Post> post = postRepo.findById(postId);
+        if(post.isPresent()) {
+            Post newPost = post.get();
+            newPost.setText(postUpdate.getText());
+            newPost.setTitle(postUpdate.getTitle());
+            postRepo.save(newPost);
             return new SuccessResult("başarılı");
         }else {
             return new ErrorResult("böyle bir post yok");

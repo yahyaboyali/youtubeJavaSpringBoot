@@ -1,6 +1,7 @@
 package yahya.deneme.app.youtubedeneme.bussiness.abstracts;
 
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
+import yahya.deneme.app.youtubedeneme.bussiness.requests.PostUpdate;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.Post;
@@ -15,7 +16,7 @@ public interface PostService {
     Result save(PostRequest postRequest);
 
     DataResult<Post> getOnePost(int postId);
-    Result updatePost(int postId);
+    Result updatePost(int postId, PostUpdate postUpdate);
 
     Result deletePost(int postId);
 }
