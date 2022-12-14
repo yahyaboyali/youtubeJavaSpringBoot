@@ -31,9 +31,9 @@ public class PostManager implements PostService {
     @Override
     public DataResult<List<Post>> getAllPost(Optional<Integer> userId) {
         if( userId.isPresent()) {
-            return new SuccessDataResult<>(postRepo.findByUserId(userId.get()),"post geldi hanım");
+            return new SuccessDataResult<>(postRepo.findByUserId(userId.get()),"one post came here");
         }
-        return new SuccessDataResult<>(postRepo.findAll(),"tüm postlar geldi hanım");
+        return new SuccessDataResult<>(postRepo.findAll(),"all posts came here");
     }
 
     @Override

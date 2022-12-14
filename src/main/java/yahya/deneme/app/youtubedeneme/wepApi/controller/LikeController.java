@@ -35,7 +35,7 @@ public class LikeController {
     public DataResult<Optional<Like>> getOneLike(@PathVariable int likeId) {
         return likeService.getOneLike(likeId);
     }
-    @DeleteMapping("/deleteLike/{likeId")
+    @DeleteMapping("/deleteLike/{likeId}")
     public Result deleteLike(@PathVariable int likeId) {
         return likeService.deleteLike(likeId);
     }

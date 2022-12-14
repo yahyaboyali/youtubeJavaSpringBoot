@@ -17,10 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Post {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY) // STRATEJİ NASIL ARTACAK BU BELİRTİYORUZ
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)//bir user silinirse postlarını sil
-    @JsonIgnore//SERilazitionda sorun çıkarmasın diye
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private int id;
 
     @Column(name = "title")
@@ -31,8 +31,8 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)//bir user silinirse tüm postlar silinsin!!
-    @JsonIgnore // bu alanla uğraştırma bizi
+    @OnDelete(action = OnDeleteAction.CASCADE)//if one user was deleted, delete all post from this user
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "post")
