@@ -15,10 +15,9 @@ export default function Post() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>kitap adı</th>
-                            <th>sayfa sayısı</th>
-                            <th>yazar adı</th>
-                            <th>yazar soyadı</th>
+                            <th>title</th>
+                            <th>text</th>
+
                         </tr>
                     </thead>
                     <tbody>
