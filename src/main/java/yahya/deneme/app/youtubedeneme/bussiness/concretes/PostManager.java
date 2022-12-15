@@ -5,6 +5,7 @@ import yahya.deneme.app.youtubedeneme.bussiness.abstracts.PostService;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.UserService;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostUpdate;
+import yahya.deneme.app.youtubedeneme.bussiness.responses.PostResponses;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.*;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.PostRepo;
 import yahya.deneme.app.youtubedeneme.dataAccess.abstracts.UserRepository;
@@ -13,6 +14,7 @@ import yahya.deneme.app.youtubedeneme.entities.concretes.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostManager implements PostService {
@@ -29,11 +31,14 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public DataResult<List<Post>> getAllPost(Optional<Integer> userId) {
+    public DataResult<List<PostResponses>> getAllPost(Optional<Integer> userId) {
+        List<Post> list;
         if( userId.isPresent()) {
-            return new SuccessDataResult<>(postRepo.findByUserId(userId.get()),"one post came here");
+            list = postRepo.findByUserId(userId.get());
+        } else {
+            list = postRepo.findAll();
         }
-        return new SuccessDataResult<>(postRepo.findAll(),"all posts came here");
+        return new SuccessDataResult<>(list.stream().map(p -> new PostResponses(p)).collect(Collectors.toList()),"post came here");
     }
 
     @Override

@@ -29,10 +29,9 @@ public class Post {
     @Column(name = "text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)//if one user was deleted, delete all post from this user
-    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "post")

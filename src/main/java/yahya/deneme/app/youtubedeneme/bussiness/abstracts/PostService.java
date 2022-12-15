@@ -2,6 +2,7 @@ package yahya.deneme.app.youtubedeneme.bussiness.abstracts;
 
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostUpdate;
+import yahya.deneme.app.youtubedeneme.bussiness.responses.PostResponses;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.Post;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-    DataResult<List<Post>> getAllPost(Optional<Integer> userId);
+    DataResult<List<PostResponses>> getAllPost(Optional<Integer> userId);
 
     Result save(PostRequest postRequest);
 

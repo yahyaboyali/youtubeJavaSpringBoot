@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import yahya.deneme.app.youtubedeneme.bussiness.abstracts.PostService;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostRequest;
 import yahya.deneme.app.youtubedeneme.bussiness.requests.PostUpdate;
+import yahya.deneme.app.youtubedeneme.bussiness.responses.PostResponses;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.DataResult;
 import yahya.deneme.app.youtubedeneme.core.utilities.results.Result;
 import yahya.deneme.app.youtubedeneme.entities.concretes.Post;
@@ -25,7 +26,7 @@ public class PostController {
     }
 
     @GetMapping
-    public DataResult<List<Post>> getAllPost(@RequestParam Optional<Integer> userId) {
+    public DataResult<List<PostResponses>> getAllPost(@RequestParam Optional<Integer> userId) {
         return postService.getAllPost(userId);
     }
     @GetMapping("/{postId}")

@@ -26,6 +26,7 @@ export default function Post() {
                                 <tr key={posts.id}>
                                     <td>{posts.title}</td>
                                     <td>{posts.text}</td>
+                                    <td>{posts.userName}</td>
                                 </tr>
                             ))
                         }
